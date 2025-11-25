@@ -7,6 +7,7 @@ target/
 frontend/
 .java-version
 *.mp4
+*.csv
 
 ### STS ###
 .apt_generated
