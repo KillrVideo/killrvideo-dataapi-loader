@@ -34,14 +34,21 @@ public class KillrvideoDataAPILoader {
 
 	//private static TemporalAccessor temporalAccessor = DateTimeFormatter.ISO_LOCAL_DATE.parse("2025-06-17");
 	private static List<Pattern> _YOUTUBE_PATTERNS = new ArrayList<>();
+	
+	private static String dataDir = System.getenv("DATA_DIR");
 
-
-		public static void main(String[] args) {
+	public static void main(String[] args) {
 		// Initialize the Data API client
 		DataAPIClient dataAPIClient = new DataAPIClient(System.getenv("ASTRA_DB_APPLICATION_TOKEN"));
 		
 		// Get the database instance
-		Database database = dataAPIClient.getDatabase(System.getenv("ASTRA_DB_API_ENDPOINT"), "killrvideo_dataapi");
+		Database database = dataAPIClient.getDatabase(System.getenv("ASTRA_DB_API_ENDPOINT"),
+				System.getenv("ASTRA_DB_NAMESPACE"));
+		
+		if (dataDir == null) {
+			
+		}
+		
 		
 		// Regex patterns to get the YouTubeID from the location
         _YOUTUBE_PATTERNS.add(Pattern.compile("(?:https?://)?(?:www\\.)?youtu\\.be/(?<id>[A-Za-z0-9_-]{11})"));
